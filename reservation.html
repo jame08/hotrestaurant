@@ -9,6 +9,7 @@
     <link href="https://fonts.googleapis.com/css?family=Bitter" rel="stylesheet">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU"
         crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery.js"></script>
     <style>
         .jumbotron{
             text-align:center;
@@ -18,7 +19,7 @@
             font-family: 'Bitter', serif;
             font-size:20px;
             text-align:center;
-            
+
 
         }
 
@@ -40,7 +41,7 @@
             color:green;
         }
 
-       
+
     </style>
 </head>
 
@@ -53,32 +54,32 @@
             <hr class="my-6">
             <h2>We only have 5 tables! Book your seat before they all are gone!</h2>
 
-            <a href="table.html"><button type="button" class="btn btn-success" id="table"><i class="far fa-list-alt"></i>
+            <a href="/table"><button type="button" class="btn btn-success" id="table"><i class="far fa-list-alt"></i>
                     View Tables</button></a>
-            <a href="hot-restaurant.html"> <button type="button" class="btn btn-success" id="homebtn"><i class="fas fa-home"></i></button></a>
+            <a href="/"> <button type="button" class="btn btn-success" id="homebtn"><i class="fas fa-home"></i></button></a>
         </div>
 
         <form>
             <div class="form-group">
                 <label for="exampleInputEmail1">Name</label>
-                <input type="name" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
+                <input type="name" class="form-control" id="name" aria-describedby="emailHelp"
                     placeholder="Name">
 
             </div>
             <div class="form-group">
                 <label for="exampleInputPassword1">Phone Number</label>
-                <input type="phone" class="form-control" id="exampleInputPassword1" placeholder="Phone Number">
+                <input type="phone" class="form-control" id="phone" placeholder="Phone Number">
             </div>
             <div class="form-group">
                 <label for="exampleInputPassword1">Email</label>
-                <input type="email" class="form-control" id="exampleInputPassword1" placeholder="Email">
+                <input type="email" class="form-control" id="email" placeholder="Email">
             </div>
             <div class="form-group">
                 <label for="exampleInputPassword1">Unique ID</label>
-                <input type="uniqueid" class="form-control" id="exampleInputPassword1" placeholder="Unique ID">
+                <input type="uniqueid" class="form-control" id="unique" placeholder="Unique ID">
             </div>
 
-            <button type="submit" class="btn btn-primary">Submit</button>
+            <button type="submit" class="btn btn-primary" id="submit">Submit</button>
         </form>
 
 
@@ -100,6 +101,22 @@
             </div>
         </div>
     </div>
+
+    <script type="text/javascript">
+      $('#submit').on("click", function(event){
+        event.preventDefault();
+        var newReservation = {
+          name: $('#name').val().trim(),
+          phone: $('#phone').val().trim(),
+          email: $('#email').val().trim(),
+          unique: $('#unique').val().trim()
+        }
+        $.post("/reservations_submit", newReservation)
+        .then(function(res){
+          
+        });
+      });
+    </script>
 
 
 </body>
